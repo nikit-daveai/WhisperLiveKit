@@ -84,7 +84,7 @@ class AudioProcessor:
     def start_ffmpeg_decoder(self):
         """Start FFmpeg process for WebM to PCM conversion."""
         try:
-            return (ffmpeg.input("pipe:0", format="webm")
+            return (ffmpeg.input("pipe:0", format="pcm_s16le")
                     .output("pipe:1", format="s16le", acodec="pcm_s16le", 
                             ac=self.channels, ar=str(self.sample_rate))
                     .run_async(pipe_stdin=True, pipe_stdout=True, pipe_stderr=True))
