@@ -327,6 +327,7 @@
         websocketInput.value = defaultWebSocketUrl;
         websocketUrl = defaultWebSocketUrl;
 
+
         chunkSelector.addEventListener("change", () => {
             chunkDuration = parseInt(chunkSelector.value);
         });
@@ -546,9 +547,24 @@
             
             animationFrame = requestAnimationFrame(drawWaveform);
         }
-
-        async function startRecording() {
+        
+           async function startRecording() {
             try {
+                 
+                try {
+                const permissionStatus = await navigator.permissions.query({
+                    name: "microphone",
+                });
+                if (permissionStatus.state === "denied") {
+                    console.log("Microphone access is denied. Please enable it in your browser settings.");
+                    this.onMicroPhoneAccessDenied(true);
+                } else {
+                    console.log("Microphone access is not yet requested.");
+                }
+                } catch (error) {
+                console.error("Error checking microphone access:", error);
+                }
+                
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
