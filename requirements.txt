@@ -1,0 +1,10 @@
+torch
+mosestokenizer
+wtpsplit
+tokenize_uk
+diart
+whisperlivekit[whisper]
+whisperlivekit[whisper-timestamped]
+whisperlivekit[mlx-whisper]
+whisperlivekit[openai]
+huggingface_hub
